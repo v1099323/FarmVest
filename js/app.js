@@ -27,7 +27,7 @@
             o = e && "IntersectionObserver" in window,
             r = e && "classList" in document.createElement("p"),
             a = e && window.devicePixelRatio > 1,
-            s = {
+            i = {
               elements_selector: ".lazy",
               container: n || e ? document : null,
               threshold: 300,
@@ -59,8 +59,8 @@
               callback_cancel: null,
               use_native: !1,
             },
-            i = function (e) {
-              return t({}, s, e);
+            s = function (e) {
+              return t({}, i, e);
             },
             l = function (t, e) {
               var n,
@@ -89,12 +89,12 @@
             v = "error",
             y = "native",
             _ = "data-",
-            b = "ll-status",
-            w = function (t, e) {
+            w = "ll-status",
+            b = function (t, e) {
               return t.getAttribute(_ + e);
             },
             E = function (t) {
-              return w(t, b);
+              return b(t, w);
             },
             L = function (t, e) {
               return (function (t, e, n) {
@@ -141,20 +141,20 @@
             W = function (t, e) {
               t && (t.loadingCount += e);
             },
-            M = function (t, e) {
+            O = function (t, e) {
               t && (t.toLoadCount = e);
             },
-            O = function (t) {
+            M = function (t) {
               for (var e, n = [], o = 0; (e = t.children[o]); o += 1)
                 "SOURCE" === e.tagName && n.push(e);
               return n;
             },
             R = function (t, e) {
               var n = t.parentNode;
-              n && "PICTURE" === n.tagName && O(n).forEach(e);
+              n && "PICTURE" === n.tagName && M(n).forEach(e);
             },
             $ = function (t, e) {
-              O(t).forEach(e);
+              M(t).forEach(e);
             },
             N = [c],
             j = [c, f],
@@ -162,13 +162,13 @@
             D = function (t) {
               return !!t[h];
             },
-            B = function (t) {
+            H = function (t) {
               return t[h];
             },
-            H = function (t) {
+            B = function (t) {
               return delete t[h];
             },
-            G = function (t, e) {
+            Y = function (t, e) {
               if (!D(t)) {
                 var n = {};
                 e.forEach(function (e) {
@@ -177,9 +177,9 @@
                   (t[h] = n);
               }
             },
-            U = function (t, e) {
+            G = function (t, e) {
               if (D(t)) {
-                var n = B(t);
+                var n = H(t);
                 e.forEach(function (e) {
                   !(function (t, e, n) {
                     n ? t.setAttribute(e, n) : t.removeAttribute(e);
@@ -187,42 +187,42 @@
                 });
               }
             },
-            Z = function (t, e, n) {
+            U = function (t, e, n) {
               C(t, e.class_loading),
                 L(t, m),
                 n && (W(n, 1), I(e.callback_loading, t, n));
             },
-            F = function (t, e, n) {
+            Z = function (t, e, n) {
               n && t.setAttribute(e, n);
             },
-            Q = function (t, e) {
-              F(t, u, w(t, e.data_sizes)),
-                F(t, d, w(t, e.data_srcset)),
-                F(t, c, w(t, e.data_src));
+            F = function (t, e) {
+              Z(t, u, b(t, e.data_sizes)),
+                Z(t, d, b(t, e.data_srcset)),
+                Z(t, c, b(t, e.data_src));
             },
-            Y = {
+            Q = {
               IMG: function (t, e) {
                 R(t, function (t) {
-                  G(t, z), Q(t, e);
+                  Y(t, z), F(t, e);
                 }),
-                  G(t, z),
-                  Q(t, e);
+                  Y(t, z),
+                  F(t, e);
               },
               IFRAME: function (t, e) {
-                G(t, N), F(t, c, w(t, e.data_src));
+                Y(t, N), Z(t, c, b(t, e.data_src));
               },
               VIDEO: function (t, e) {
                 $(t, function (t) {
-                  G(t, N), F(t, c, w(t, e.data_src));
+                  Y(t, N), Z(t, c, b(t, e.data_src));
                 }),
-                  G(t, j),
-                  F(t, f, w(t, e.data_poster)),
-                  F(t, c, w(t, e.data_src)),
+                  Y(t, j),
+                  Z(t, f, b(t, e.data_poster)),
+                  Z(t, c, b(t, e.data_src)),
                   t.load();
               },
             },
-            V = ["IMG", "IFRAME", "VIDEO"],
-            X = function (t, e) {
+            X = ["IMG", "IFRAME", "VIDEO"],
+            V = function (t, e) {
               !e ||
                 (function (t) {
                   return t.loadingCount > 0;
@@ -278,7 +278,7 @@
                         C(e, n.class_loaded),
                         L(e, p),
                         I(n.callback_loaded, e, o),
-                        r || X(n, o);
+                        r || V(n, o);
                     })(0, t, e, n),
                       et(o);
                   },
@@ -289,7 +289,7 @@
                         C(e, n.class_error),
                         L(e, v),
                         I(n.callback_error, e, o),
-                        r || X(n, o);
+                        r || V(n, o);
                     })(0, t, e, n),
                       et(o);
                   }
@@ -304,20 +304,20 @@
                   D(t) || (t[h] = { backgroundImage: t.style.backgroundImage });
                 })(t),
                 (function (t, e, n) {
-                  var o = w(t, e.data_bg),
-                    r = w(t, e.data_bg_hidpi),
-                    s = a && r ? r : o;
-                  s &&
-                    ((t.style.backgroundImage = 'url("'.concat(s, '")')),
-                    q(t).setAttribute(c, s),
-                    Z(t, e, n));
+                  var o = b(t, e.data_bg),
+                    r = b(t, e.data_bg_hidpi),
+                    i = a && r ? r : o;
+                  i &&
+                    ((t.style.backgroundImage = 'url("'.concat(i, '")')),
+                    q(t).setAttribute(c, i),
+                    U(t, e, n));
                 })(t, e, n),
                 (function (t, e, n) {
-                  var o = w(t, e.data_bg_multi),
-                    r = w(t, e.data_bg_multi_hidpi),
-                    s = a && r ? r : o;
-                  s &&
-                    ((t.style.backgroundImage = s),
+                  var o = b(t, e.data_bg_multi),
+                    r = b(t, e.data_bg_multi_hidpi),
+                    i = a && r ? r : o;
+                  i &&
+                    ((t.style.backgroundImage = i),
                     (function (t, e, n) {
                       C(t, e.class_applied),
                         L(t, g),
@@ -329,36 +329,36 @@
             },
             at = function (t, e, n) {
               !(function (t) {
-                return V.indexOf(t.tagName) > -1;
+                return X.indexOf(t.tagName) > -1;
               })(t)
                 ? rt(t, e, n)
                 : (function (t, e, n) {
                     ot(t, e, n),
                       (function (t, e, n) {
-                        var o = Y[t.tagName];
-                        o && (o(t, e), Z(t, e, n));
+                        var o = Q[t.tagName];
+                        o && (o(t, e), U(t, e, n));
                       })(t, e, n);
                   })(t, e, n);
             },
-            st = function (t) {
+            it = function (t) {
               t.removeAttribute(c), t.removeAttribute(d), t.removeAttribute(u);
             },
-            it = function (t) {
+            st = function (t) {
               R(t, function (t) {
-                U(t, z);
+                G(t, z);
               }),
-                U(t, z);
+                G(t, z);
             },
             lt = {
-              IMG: it,
+              IMG: st,
               IFRAME: function (t) {
-                U(t, N);
+                G(t, N);
               },
               VIDEO: function (t) {
                 $(t, function (t) {
-                  U(t, N);
+                  G(t, N);
                 }),
-                  U(t, j),
+                  G(t, j),
                   t.load();
               },
             },
@@ -369,7 +369,7 @@
                   ? e(t)
                   : (function (t) {
                       if (D(t)) {
-                        var e = B(t);
+                        var e = H(t);
                         t.style.backgroundImage = e.backgroundImage;
                       }
                     })(t);
@@ -385,7 +385,7 @@
                     T(t, e.class_error));
                 })(t, e),
                 A(t),
-                H(t);
+                B(t);
             },
             dt = ["IMG", "IFRAME", "VIDEO"],
             ut = function (t) {
@@ -421,11 +421,11 @@
                             (et(t),
                             (function (t) {
                               R(t, function (t) {
-                                st(t);
+                                it(t);
                               }),
-                                st(t);
+                                it(t);
                             })(t),
-                            it(t),
+                            st(t),
                             T(t, n.class_loading),
                             W(o, -1),
                             A(t),
@@ -452,7 +452,7 @@
               })(t || mt(e));
             },
             vt = function (t, n) {
-              var r = i(t);
+              var r = s(t);
               (this._settings = r),
                 (this.loadingCount = 0),
                 (function (t, e) {
@@ -490,8 +490,8 @@
                 var e,
                   r,
                   a = this._settings,
-                  s = gt(t, a);
-                M(this, s.length),
+                  i = gt(t, a);
+                O(this, i.length),
                   !n && o
                     ? ut(a)
                       ? (function (t, e, n) {
@@ -501,15 +501,15 @@
                                 t.setAttribute("loading", "lazy"),
                                   ot(t, e, n),
                                   (function (t, e) {
-                                    var n = Y[t.tagName];
+                                    var n = Q[t.tagName];
                                     n && n(t, e);
                                   })(t, e),
                                   L(t, y);
                               })(t, e, n);
                           }),
-                            M(n, 0);
-                        })(s, a, this)
-                      : ((r = s),
+                            O(n, 0);
+                        })(i, a, this)
+                      : ((r = i),
                         (function (t) {
                           t.disconnect();
                         })((e = this._observer)),
@@ -518,12 +518,12 @@
                             t.observe(e);
                           });
                         })(e, r))
-                    : this.loadAll(s);
+                    : this.loadAll(i);
               },
               destroy: function () {
                 this._observer && this._observer.disconnect(),
                   mt(this._settings).forEach(function (t) {
-                    H(t);
+                    B(t);
                   }),
                   delete this._observer,
                   delete this._settings,
@@ -545,7 +545,7 @@
               },
             }),
             (vt.load = function (t, e) {
-              var n = i(e);
+              var n = s(e);
               at(t, n);
             }),
             (vt.resetStatus = function (t) {
@@ -651,7 +651,7 @@
             }, t);
         }
       },
-      s = (t = 500) => {
+      i = (t = 500) => {
         let e = document.querySelector("body");
         if (r) {
           let n = document.querySelectorAll("[data-lp]");
@@ -672,7 +672,7 @@
             }, t);
         }
       };
-    function i(t) {
+    function s(t) {
       setTimeout(() => {
         window.FLS && console.log(t);
       }, 0);
@@ -716,11 +716,11 @@
               const n = e.split(","),
                 o = n[1],
                 a = n[2],
-                s = window.matchMedia(n[0]),
-                i = t.filter(function (t) {
+                i = window.matchMedia(n[0]),
+                s = t.filter(function (t) {
                   if (t.value === o && t.type === a) return !0;
                 });
-              r.push({ itemsArray: i, matchMedia: s });
+              r.push({ itemsArray: s, matchMedia: i });
             }),
             r
           );
@@ -746,8 +746,8 @@
             o = t.dataset.prlxCy ? +t.dataset.prlxCy : 100,
             r = t.hasAttribute("data-prlx-dxr") ? -1 : 1,
             a = t.hasAttribute("data-prlx-dyr") ? -1 : 1,
-            s = t.dataset.prlxA ? +t.dataset.prlxA : 50;
-          let i = 0,
+            i = t.dataset.prlxA ? +t.dataset.prlxA : 50;
+          let s = 0,
             l = 0,
             c = 0,
             d = 0;
@@ -764,10 +764,10 @@
             });
           }
           !(function e() {
-            (i += ((c - i) * s) / 1e3),
-              (l += ((d - l) * s) / 1e3),
+            (s += ((c - s) * i) / 1e3),
+              (l += ((d - l) * i) / 1e3),
               (t.style.cssText = `transform: translate3D(${
-                (r * i) / (n / 10)
+                (r * s) / (n / 10)
               }%,${(a * l) / (o / 10)}%,0);`),
               requestAnimationFrame(e);
           })(),
@@ -775,20 +775,20 @@
         });
       }
       setLogging(t) {
-        this.config.logging && i(`[PRLX Mouse]: ${t}`);
+        this.config.logging && s(`[PRLX Mouse]: ${t}`);
       }
     })({});
     let d = (t, e = !1, n = 500, o = 0) => {
       const r = "string" == typeof t ? document.querySelector(t) : t;
       if (r) {
-        let s = "",
+        let i = "",
           l = 0;
         e &&
-          ((s = "header.header"), (l = document.querySelector(s).offsetHeight));
+          ((i = "header.header"), (l = document.querySelector(i).offsetHeight));
         let c = {
           speedAsDuration: !0,
           speed: n,
-          header: s,
+          header: i,
           offset: o,
           easing: "easeOutQuad",
         };
@@ -802,8 +802,8 @@
           let t = r.getBoundingClientRect().top + scrollY;
           window.scrollTo({ top: l ? t - l : t, behavior: "smooth" });
         }
-        i(`[gotoBlock]: Юхуу...едем к ${t}`);
-      } else i(`[gotoBlock]: Ой ой..Такого блока нет на странице: ${t}`);
+        s(`[gotoBlock]: Юхуу...едем к ${t}`);
+      } else s(`[gotoBlock]: Ой ой..Такого блока нет на странице: ${t}`);
     };
     let u = {
       getErrors(t) {
@@ -980,7 +980,7 @@
           this.scrollWatcherLogging(`Я перестал следить за ${t.classList}`);
       }
       scrollWatcherLogging(t) {
-        this.config.logging && i(`[Наблюдатель]: ${t}`);
+        this.config.logging && s(`[Наблюдатель]: ${t}`);
       }
       scrollWatcherCallback(t, e) {
         const n = t.target;
@@ -1048,13 +1048,13 @@
             o = String.prototype.split.call(n, ","),
             r = window.matchMedia(o[0]),
             a = o[1],
-            s = Array.prototype.filter.call(this.оbjects, function (t) {
+            i = Array.prototype.filter.call(this.оbjects, function (t) {
               return t.breakpoint === a;
             });
           r.addListener(function () {
-            t.mediaHandler(r, s);
+            t.mediaHandler(r, i);
           }),
-            this.mediaHandler(r, s);
+            this.mediaHandler(r, i);
         }
       }),
       (h.prototype.mediaHandler = function (t, e) {
@@ -1114,19 +1114,47 @@
                 : e.breakpoint - t.breakpoint;
             });
       });
-    new h("max").init(),
-      (function (t) {
-        let e = new Image();
-        (e.onload = e.onerror =
-          function () {
-            t(2 == e.height);
-          }),
-          (e.src =
-            "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA");
-      })(function (t) {
-        let e = !0 === t ? "webp" : "no-webp";
-        document.documentElement.classList.add(e);
-      }),
+    new h("max").init();
+    let m = document.querySelectorAll("[data-anim-items]");
+    if (m.length > 0) {
+      function t() {
+        for (let t = 0; t < m.length; t++) {
+          const n = m[t],
+            o = n.offsetHeight,
+            r = e(n).top,
+            a = 4;
+          let i = window.innerHeight - o / a;
+          o > window.innerHeight &&
+            (i = window.innerHeight - window.innerHeight / a),
+            pageYOffset > r - i && pageYOffset < r + o
+              ? n.classList.add("_active")
+              : n.hasAttribute("data-anim-items-hide") ||
+                n.classList.remove("_active");
+        }
+      }
+      function e(t) {
+        const e = t.getBoundingClientRect(),
+          n = window.pageXOffset || document.documentElement.scrollLeft,
+          o = window.pageYOffset || document.documentElement.scrollTop;
+        return { top: e.top + o, left: e.left + n };
+      }
+      window.addEventListener("scroll", t),
+        setTimeout(() => {
+          t();
+        }, 300);
+    }
+    !(function (t) {
+      let e = new Image();
+      (e.onload = e.onerror =
+        function () {
+          t(2 == e.height);
+        }),
+        (e.src =
+          "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA");
+    })(function (t) {
+      let e = !0 === t ? "webp" : "no-webp";
+      document.documentElement.classList.add(e);
+    }),
       (function () {
         let t = document.querySelector(".icon-menu");
         t &&
@@ -1135,7 +1163,7 @@
               (((t = 500) => {
                 document.documentElement.classList.contains("lock")
                   ? a(t)
-                  : s(t);
+                  : i(t);
               })(),
               document.documentElement.classList.toggle("menu-open"),
               document.documentElement.classList.contains("catalog-open") &&
@@ -1157,14 +1185,14 @@
               (t = e ? t.item : t),
                 e.matches || !e
                   ? (t.classList.add("_spoller-init"),
-                    s(t),
-                    t.addEventListener("click", i))
+                    i(t),
+                    t.addEventListener("click", s))
                   : (t.classList.remove("_spoller-init"),
-                    s(t, !1),
-                    t.removeEventListener("click", i));
+                    i(t, !1),
+                    t.removeEventListener("click", s));
             });
           }
-          function s(t, e = !0) {
+          function i(t, e = !0) {
             let n = t.querySelectorAll("[data-spoller]");
             n.length &&
               ((n = Array.from(n).filter(
@@ -1179,14 +1207,14 @@
                     (t.nextElementSibling.hidden = !1));
               }));
           }
-          function i(t) {
+          function s(t) {
             const n = t.target;
             if (n.closest("[data-spoller]")) {
               const r = n.closest("[data-spoller]"),
                 a = r.closest("[data-spollers]"),
-                s = !!a.hasAttribute("data-one-spoller");
+                i = !!a.hasAttribute("data-one-spoller");
               a.querySelectorAll("._slide").length ||
-                (s && !r.classList.contains("_spoller-active") && l(a),
+                (i && !r.classList.contains("_spoller-active") && l(a),
                 r.classList.toggle("_spoller-active"),
                 ((t, n = 500) => {
                   t.hidden ? o(t, n) : e(t, n);
@@ -1259,9 +1287,9 @@
                   : "GET",
                 a = new FormData(t);
               t.classList.add("_sending");
-              const s = await fetch(e, { method: o, body: a });
-              if (s.ok) {
-                await s.json();
+              const i = await fetch(e, { method: o, body: a });
+              if (i.ok) {
+                await i.json();
                 t.classList.remove("_sending"), r(t);
               } else alert("Ошибка"), t.classList.remove("_sending");
             } else t.hasAttribute("data-dev") && (n.preventDefault(), r(t));
@@ -1282,7 +1310,7 @@
               }
             }, 0),
             u.formClean(e),
-            i(`[Формы]: ${"Форма отправлена!"}`);
+            s(`[Формы]: ${"Форма отправлена!"}`);
         }
       })(!0),
       (function () {
@@ -1321,14 +1349,14 @@
           o = t.dataset.scroll ? t.dataset.scroll : 1;
         let r,
           a = 0;
-        document.addEventListener("windowScroll", function (s) {
-          const i = window.scrollY;
+        document.addEventListener("windowScroll", function (i) {
+          const s = window.scrollY;
           clearTimeout(r),
-            i >= o
+            s >= o
               ? (!t.classList.contains("_header-scroll") &&
                   t.classList.add("_header-scroll"),
                 e &&
-                  (i > a
+                  (s > a
                     ? t.classList.contains("_header-show") &&
                       t.classList.remove("_header-show")
                     : !t.classList.contains("_header-show") &&
@@ -1342,7 +1370,7 @@
                 e &&
                   t.classList.contains("_header-show") &&
                   t.classList.remove("_header-show")),
-            (a = i <= 0 ? 0 : i);
+            (a = s <= 0 ? 0 : s);
         });
       })();
   })();

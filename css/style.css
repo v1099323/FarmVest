@@ -940,6 +940,8 @@ body {
   }
 }
 .main-block__title {
+  transform: translate(-50%, 0);
+  opacity: 0;
   max-width: 51.875rem;
 }
 @media (min-width: 103.125em) {
@@ -957,9 +959,16 @@ body {
     padding-bottom: 1.875rem;
   }
 }
+.main-block__title._active {
+  transition: all 0.5s ease 0s;
+  transform: translate(0, 0);
+  opacity: 1;
+}
 .main-block__text {
   max-width: 35.625rem;
   line-height: 180%;
+  transform: translate(50%, 0);
+  opacity: 0;
 }
 @media (min-width: 103.125em) {
   .main-block__text:not(:last-child) {
@@ -975,6 +984,20 @@ body {
   .main-block__text:not(:last-child) {
     padding-bottom: 1.25rem;
   }
+}
+.main-block__text._active {
+  transition: all 0.5s ease 0.4s;
+  transform: translate(0, 0);
+  opacity: 1;
+}
+.main-block__form {
+  opacity: 0;
+  transform: translate(0, 100%);
+}
+.main-block__form._active {
+  transition: all 0.5s ease 0.8s;
+  transform: translate(0, 0);
+  opacity: 1;
 }
 @media (max-width: 26.875em) {
   .main-block__form {
@@ -1129,11 +1152,17 @@ body {
 .how__container {
   display: grid;
   row-gap: 1.875rem;
+  opacity: 0;
 }
 @media (min-width: 61.99875em) {
   .how__container {
     grid-template-columns: 1fr 52.8169014085%;
   }
+}
+.how__container._active, .how__container._active [data-anim-show] {
+  transition: all 1s ease 0s;
+  opacity: 1;
+  transform: translate(0, 0);
 }
 @media (min-width: 88.75em) {
   .how__content {
@@ -1181,7 +1210,14 @@ body {
   }
 }
 .how__image {
+  opacity: 0;
+  transform: translate(50%, 0);
   align-self: start;
+}
+.how__image._active, .how__image._active [data-anim-show] {
+  transition: all 1s ease 1s;
+  opacity: 1;
+  transform: translate(0, 0);
 }
 
 .steps-now__item {
@@ -1269,8 +1305,18 @@ body {
     flex-direction: column-reverse;
   }
 }
+.pathway__image {
+  opacity: 0;
+  transform: translate(-50%, 0);
+}
+.pathway__image._active, .pathway__image._active [data-anim-show] {
+  transition: all 1.2s ease 0s;
+  opacity: 1;
+  transform: translate(0, 0);
+}
 .pathway__content {
   flex: 0 0 48.8732394366%;
+  opacity: 0;
 }
 @media (min-width: 88.75em) {
   .pathway__content {
@@ -1281,6 +1327,11 @@ body {
   .pathway__content {
     padding-left: clamp( 1.875rem , -12.0315420561rem  +  22.4299065421vw , 7.875rem );
   }
+}
+.pathway__content._active, .pathway__content._active [data-anim-show] {
+  transition: all 1s ease 0s;
+  opacity: 1;
+  transform: translate(0, 0);
 }
 @media (min-width: 103.125em) {
   .pathway__title:not(:last-child) {
@@ -1431,6 +1482,10 @@ body {
     grid-template-columns: 1fr 52.8169014085%;
   }
 }
+.why__content {
+  opacity: 0;
+  transform: translate(0, 0);
+}
 @media (min-width: 88.75em) {
   .why__content {
     padding-right: 5.9375rem;
@@ -1445,6 +1500,11 @@ body {
   .why__content {
     text-align: center;
   }
+}
+.why__content._active {
+  transition: all 1s ease 0s;
+  opacity: 1;
+  transform: translate(0, 0);
 }
 @media (min-width: 103.125em) {
   .why__title:not(:last-child) {
@@ -1504,9 +1564,16 @@ body {
 .why__image {
   background: transparent;
   padding: 0;
+  opacity: 0;
+  transform: translate(50%, 0);
 }
 .why__image .image-block__circle {
   display: none;
+}
+.why__image._active {
+  transition: all 1s ease 0s;
+  opacity: 1;
+  transform: translate(0, 0);
 }
 
 .steps-why {
@@ -1682,6 +1749,21 @@ body {
 }
 .reviews__item {
   flex: 0 1 50%;
+  opacity: 0;
+  transform: translate(-50%, 0);
+}
+.reviews__item._active {
+  transition: all 1s ease 0s;
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.reviews__item:nth-child(2) {
+  transform: translate(50%, 0);
+}
+.reviews__item:nth-child(2)._active {
+  transition: all 1s ease 0s;
+  opacity: 1;
+  transform: translate(0, 0);
 }
 .reviews__button {
   min-width: 13.8125rem;
@@ -1757,6 +1839,8 @@ body {
   text-align: center;
   display: grid;
   justify-items: center;
+  opacity: 0;
+  transform: translate(0, 50%);
 }
 @media (min-width: 103.125em) {
   .download__body {
@@ -1787,6 +1871,11 @@ body {
   .download__body {
     padding-bottom: 1.875rem;
   }
+}
+.download__body._active {
+  opacity: 1;
+  transform: translate(0, 0);
+  transition: all 1s ease 0s;
 }
 .download__title {
   max-width: 43.75rem;
